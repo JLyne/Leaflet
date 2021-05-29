@@ -1,14 +1,14 @@
 import * as DomEvent from './DomEvent';
-import Browser from '../core/Browser';
 
 /*
  * Extends L.DomEvent to provide touch support for Internet Explorer and Windows-based devices.
  */
 
-var POINTER_DOWN =   Browser.msPointer ? 'MSPointerDown'   : 'pointerdown';
-var POINTER_MOVE =   Browser.msPointer ? 'MSPointerMove'   : 'pointermove';
-var POINTER_UP =     Browser.msPointer ? 'MSPointerUp'     : 'pointerup';
-var POINTER_CANCEL = Browser.msPointer ? 'MSPointerCancel' : 'pointercancel';
+
+var POINTER_DOWN =   'pointerdown';
+var POINTER_MOVE =   'pointermove';
+var POINTER_UP =     'pointerup';
+var POINTER_CANCEL = 'pointercancel';
 var pEvent = {
 	touchstart  : POINTER_DOWN,
 	touchmove   : POINTER_MOVE,
