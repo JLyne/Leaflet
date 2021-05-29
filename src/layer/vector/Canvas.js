@@ -14,7 +14,7 @@ import {Bounds} from '../../geometry/Bounds';
  * Inherits `Renderer`.
  *
  * Due to [technical limitations](https://caniuse.com/canvas), Canvas is not
- * available in all web browsers, notably IE8, and overlapping geometries might
+ * available in all web browsers and overlapping geometries might
  * not display properly in some edge cases.
  *
  * @example
