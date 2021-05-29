@@ -113,10 +113,8 @@ Check out the [Leaflet.markercluster](https://github.com/Leaflet/Leaflet.markerc
 Leaflet generally does a pretty good job of handling heavy vector data
 with its real-time clipping and simplification algorithms,
 but browser technology still has its limits.
-Try [switching from SVG to Canvas as the default rendering back-end](http://leafletjs.com/reference.html#global),
-it may help considerably (depends on the app and the data).
 
-If you still have too much data to render, you'll have to use some help of a server-side service
+If you have too much data to render, you'll have to use some help of a server-side service
 like [MapBox](https://www.mapbox.com/),
 [CartoDB](http://cartodb.com/)
 and [GIS Cloud](http://www.giscloud.com/)
