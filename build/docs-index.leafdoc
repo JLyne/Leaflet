@@ -33,7 +33,6 @@ This file just defines the order of the classes in the docs.
 @class DivIcon
 
 @class Control.Zoom
-@class Control.Attribution
 @class Control.Layers
 @class Control.Scale
 
