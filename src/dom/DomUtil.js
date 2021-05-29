@@ -158,37 +158,10 @@ export function getClass(el) {
 }
 
 // @function setOpacity(el: HTMLElement, opacity: Number)
-// Set the opacity of an element (including old IE support).
+// Set the opacity of an element.
 // `opacity` must be a number from `0` to `1`.
 export function setOpacity(el, value) {
-	if ('opacity' in el.style) {
-		el.style.opacity = value;
-	} else if ('filter' in el.style) {
-		_setOpacityIE(el, value);
-	}
-}
-
-function _setOpacityIE(el, value) {
-	var filter = false,
-	    filterName = 'DXImageTransform.Microsoft.Alpha';
-
-	// filters collection throws an error if we try to retrieve a filter that doesn't exist
-	try {
-		filter = el.filters.item(filterName);
-	} catch (e) {
-		// don't set opacity to 1 if we haven't already set an opacity,
-		// it isn't needed and breaks transparent pngs.
-		if (value === 1) { return; }
-	}
-
-	value = Math.round(value * 100);
-
-	if (filter) {
-		filter.Enabled = (value !== 100);
-		filter.Opacity = value;
-	} else {
-		el.style.filter += ' progid:' + filterName + '(opacity=' + value + ')';
-	}
+	el.style.opacity = value;
 }
 
 // @function testProp(props: String[]): String|false
@@ -214,9 +187,7 @@ export function setTransform(el, offset, scale) {
 	var pos = offset || new Point(0, 0);
 
 	el.style[TRANSFORM] =
-		(Browser.ie3d ?
-			'translate(' + pos.x + 'px,' + pos.y + 'px)' :
-			'translate3d(' + pos.x + 'px,' + pos.y + 'px,0)') +
+		('translate3d(' + pos.x + 'px,' + pos.y + 'px,0)') +
 		(scale ? ' scale(' + scale + ')' : '');
 }
 
