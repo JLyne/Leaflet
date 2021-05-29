@@ -10,19 +10,13 @@ import {svgCreate} from '../layer/vector/SVG.Util';
  * @example
  *
  * ```js
- * if (L.Browser.ielt9) {
+ * if (L.Browser.edge) {
  *   alert('Upgrade your browser, dude!');
  * }
  * ```
  */
 
 var style = document.documentElement.style;
-
-// @property ie: Boolean; `true` for all Internet Explorer versions (not Edge).
-var ie = 'ActiveXObject' in window;
-
-// @property ielt9: Boolean; `true` for Internet Explorer versions less than 9.
-var ielt9 = ie && !document.addEventListener;
 
 // @property edge: Boolean; `true` for the Edge web browser.
 var edge = 'msLaunchUri' in navigator && !('documentMode' in document);
@@ -50,7 +44,7 @@ var opera = !!window.opera;
 var chrome = !edge && userAgentContains('chrome');
 
 // @property gecko: Boolean; `true` for gecko-based browsers like Firefox.
-var gecko = userAgentContains('gecko') && !webkit && !opera && !ie;
+var gecko = userAgentContains('gecko') && !webkit && !opera;
 
 // @property safari: Boolean; `true` for the Safari browser.
 var safari = !chrome && userAgentContains('safari');
@@ -64,9 +58,6 @@ var opera12 = 'OTransition' in style;
 // @property win: Boolean; `true` when the browser is running in a Windows platform
 var win = navigator.platform.indexOf('Win') === 0;
 
-// @property ie3d: Boolean; `true` for all Internet Explorer versions supporting CSS transforms.
-var ie3d = ie && ('transition' in style);
-
 // @property webkit3d: Boolean; `true` for webkit-based browsers supporting CSS transforms.
 var webkit3d = ('WebKitCSSMatrix' in window) && ('m11' in new window.WebKitCSSMatrix()) && !android23;
 
@@ -75,7 +66,7 @@ var gecko3d = 'MozPerspective' in style;
 
 // @property any3d: Boolean
 // `true` for all browsers supporting CSS transforms.
-var any3d = !window.L_DISABLE_3D && (ie3d || webkit3d || gecko3d) && !opera12 && !phantom;
+var any3d = !window.L_DISABLE_3D && (webkit3d || gecko3d) && !opera12 && !phantom;
 
 // @property mobile: Boolean; `true` for all browsers running in a mobile device.
 var mobile = typeof orientation !== 'undefined' || userAgentContains('mobile');
@@ -87,13 +78,9 @@ var mobileWebkit = mobile && webkit;
 // `true` for all webkit-based browsers in a mobile device supporting CSS transforms.
 var mobileWebkit3d = mobile && webkit3d;
 
-// @property msPointer: Boolean
-// `true` for browsers implementing the Microsoft touch events model (notably IE10).
-var msPointer = !window.PointerEvent && window.MSPointerEvent;
-
 // @property pointer: Boolean
 // `true` for all browsers supporting [pointer events](https://msdn.microsoft.com/en-us/library/dn433244%28v=vs.85%29.aspx).
-var pointer = !!(window.PointerEvent || msPointer);
+var pointer = !!window.PointerEvent;
 
 // @property touchNative: Boolean
 // `true` for all browsers supporting [touch events](https://developer.mozilla.org/docs/Web/API/Touch_events).
@@ -152,8 +139,6 @@ function userAgentContains(str) {
 
 
 export default {
-	ie: ie,
-	ielt9: ielt9,
 	edge: edge,
 	webkit: webkit,
 	android: android,
@@ -166,14 +151,12 @@ export default {
 	phantom: phantom,
 	opera12: opera12,
 	win: win,
-	ie3d: ie3d,
 	webkit3d: webkit3d,
 	gecko3d: gecko3d,
 	any3d: any3d,
 	mobile: mobile,
 	mobileWebkit: mobileWebkit,
 	mobileWebkit3d: mobileWebkit3d,
-	msPointer: msPointer,
 	pointer: pointer,
 	touch: touch,
 	touchNative: touchNative,
