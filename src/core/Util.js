@@ -197,26 +197,8 @@ export function indexOf(array, el) {
 // mobile devices (by setting image `src` to this string).
 export var emptyImageUrl = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 
-// inspired by https://paulirish.com/2011/requestanimationframe-for-smart-animating/
-
-function getPrefixed(name) {
-	return window['webkit' + name] || window['moz' + name] || window['ms' + name];
-}
-
-var lastTime = 0;
-
-// fallback for IE 7-8
-function timeoutDefer(fn) {
-	var time = +new Date(),
-	    timeToCall = Math.max(0, 16 - (time - lastTime));
-
-	lastTime = time + timeToCall;
-	return window.setTimeout(fn, timeToCall);
-}
-
-export var requestFn = window.requestAnimationFrame || getPrefixed('RequestAnimationFrame') || timeoutDefer;
-export var cancelFn = window.cancelAnimationFrame || getPrefixed('CancelAnimationFrame') ||
-		getPrefixed('CancelRequestAnimationFrame') || function (id) { window.clearTimeout(id); };
+export var requestFn = window.requestAnimationFrame;
+export var cancelFn = window.cancelAnimationFrame;
 
 // @function requestAnimFrame(fn: Function, context?: Object, immediate?: Boolean): Number
 // Schedules `fn` to be executed when the browser repaints. `fn` is bound to

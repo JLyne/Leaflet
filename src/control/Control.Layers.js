@@ -175,9 +175,6 @@ export var Layers = Control.extend({
 		    container = this._container = DomUtil.create('div', className),
 		    collapsed = this.options.collapsed;
 
-		// makes this work on IE touch devices by stopping it from firing a mouseout event when the touch is released
-		container.setAttribute('aria-haspopup', true);
-
 		DomEvent.disableClickPropagation(container);
 		DomEvent.disableScrollPropagation(container);
 
@@ -304,18 +301,6 @@ export var Layers = Control.extend({
 		}
 	},
 
-	// IE7 bugs out if you create a radio dynamically, so you have to do it this hacky way (see https://stackoverflow.com/a/119079)
-	_createRadioElement: function (name, checked) {
-
-		var radioHtml = '<input type="radio" class="leaflet-control-layers-selector" name="' +
-				name + '"' + (checked ? ' checked="checked"' : '') + '/>';
-
-		var radioFragment = document.createElement('div');
-		radioFragment.innerHTML = radioHtml;
-
-		return radioFragment.firstChild;
-	},
-
 	_addItem: function (obj) {
 		var label = document.createElement('label'),
 		    checked = this._map.hasLayer(obj.layer),
@@ -327,7 +312,11 @@ export var Layers = Control.extend({
 			input.className = 'leaflet-control-layers-selector';
 			input.defaultChecked = checked;
 		} else {
-			input = this._createRadioElement('leaflet-base-layers_' + Util.stamp(this), checked);
+			input = document.createElement('input');
+			input.type = 'radio';
+			input.className = 'leaflet-control-layers-selector';
+			input.defaultChecked = checked;
+			input.name = 'leaflet-base-layers_' + Util.stamp(this);
 		}
 
 		this._layerControlInputs.push(input);
