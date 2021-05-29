@@ -7,7 +7,7 @@ describe('Canvas', () => {
 
 	beforeEach(() => {
 		container = createContainer();
-		map = L.map(container, {preferCanvas: true, zoomControl: false});
+		map = L.map(container, {zoomControl: false});
 		map.setView([0, 0], 6);
 		latLngs = [p2ll(0, 0), p2ll(0, 100), p2ll(100, 100), p2ll(100, 0)];
 	});
@@ -55,33 +55,6 @@ describe('Canvas', () => {
 			map.on('click', spy);
 			UIEventSimulator.fireAt('click', 50, 50);
 			expect(spy.callCount).to.eql(1);
-		});
-
-		it('should be transparent for DOM events going to non-canvas features', () => {
-			const marker = L.marker(map.layerPointToLatLng([150, 150]))
-				.addTo(map);
-			const circle = L.circle(map.layerPointToLatLng([200, 200]), {
-				radius: 20000,
-				renderer: L.svg()
-			}).addTo(map);
-
-			const spyPolygon = sinon.spy();
-			const spyMap = sinon.spy();
-			const spyMarker = sinon.spy();
-			const spyCircle = sinon.spy();
-			layer.on('click', spyPolygon);
-			map.on('click', spyMap);
-			marker.on('click', spyMarker);
-			circle.on('click', spyCircle);
-
-			UIEventSimulator.fireAt('click', 50, 50);   // polygon (canvas)
-			UIEventSimulator.fireAt('click', 151, 151); // empty space
-			UIEventSimulator.fireAt('click', 150, 148); // marker
-			UIEventSimulator.fireAt('click', 200, 200); // circle (svg)
-			expect(spyPolygon.callCount).to.eql(1);
-			expect(spyMap.callCount).to.eql(3); // except marker
-			expect(spyMarker.callCount).to.eql(1);
-			expect(spyCircle.callCount).to.eql(1);
 		});
 
 		it('should not block mousemove event going to non-canvas features', () => {

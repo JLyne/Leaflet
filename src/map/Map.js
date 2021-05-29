@@ -70,8 +70,7 @@ export const Map = Evented.extend({
 		maxBounds: undefined,
 
 		// @option renderer: Renderer = *
-		// The default method for drawing vector layers on the map. `L.SVG`
-		// or `L.Canvas` by default depending on browser support.
+		// The default method for drawing vector layers on the map.`L.Canvas` by default.
 		renderer: undefined,
 
 
