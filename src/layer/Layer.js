@@ -88,12 +88,6 @@ export var Layer = Evented.extend({
 		return this;
 	},
 
-	// @method getAttribution: String
-	// Used by the `attribution control`, returns the [attribution option](#gridlayer-attribution).
-	getAttribution: function () {
-		return this.options.attribution;
-	},
-
 	_layerAdd: function (e) {
 		var map = e.target;
 
@@ -131,9 +125,6 @@ export var Layer = Evented.extend({
  *
  * @method getEvents(): Object
  * This optional method should return an object like `{ viewreset: this._reset }` for [`addEventListener`](#evented-addeventlistener). The event handlers in this object will be automatically added and removed from the map with your layer.
- *
- * @method getAttribution(): String
- * This optional method should return a string containing HTML to be shown on the `Attribution control` whenever the layer is visible.
  *
  * @method beforeAdd(map: Map): this
  * Optional method. Called on [`map.addLayer(layer)`](#map-addlayer), before the layer is added to the map, before events are initialized, without waiting until the map is in a usable state. Use for early initialization only.
