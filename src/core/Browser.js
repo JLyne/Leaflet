@@ -1,5 +1,4 @@
 import * as Util from './Util';
-import {svgCreate} from '../layer/vector/SVG.Util';
 
 /*
  * @namespace Browser
@@ -114,10 +113,6 @@ var canvas = (function () {
 	return !!document.createElement('canvas').getContext;
 }());
 
-// @property svg: Boolean
-// `true` when the browser supports [SVG](https://developer.mozilla.org/docs/Web/SVG).
-var svg = !!(document.createElementNS && svgCreate('svg').createSVGRect);
-
 function userAgentContains(str) {
 	return navigator.userAgent.toLowerCase().indexOf(str) >= 0;
 }
@@ -146,5 +141,4 @@ export default {
 	retina: retina,
 	passiveEvents: passiveEvents,
 	canvas: canvas,
-	svg: svg,
 };

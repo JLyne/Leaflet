@@ -54,7 +54,7 @@ describe('Path', function () {
 			var spy = sinon.spy();
 			var layer = new L.Polygon([[1, 2], [3, 4], [5, 6]]).addTo(map);
 			layer.on('click', spy);
-			happen.click(layer._path);
+			happen.at('click', 210, 210);
 			expect(spy.called).to.be.ok();
 		});
 
@@ -66,7 +66,7 @@ describe('Path', function () {
 			layer.on('click', spy);
 			layer.on('click', spy2);
 			map.on('click', mapSpy);
-			happen.click(layer._path);
+			happen.at('click', 210, 210);
 			expect(spy.called).to.be.ok();
 			expect(spy2.called).to.be.ok();
 			expect(mapSpy.called).to.be.ok();
