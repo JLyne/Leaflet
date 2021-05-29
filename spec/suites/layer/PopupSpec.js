@@ -275,7 +275,7 @@ describe('Popup', function () {
 		});
 
 		expect(map.hasLayer(layer._popup)).to.be(false);
-		happen.click(layer._path);
+		happen.at('click', 210, 210);
 		expect(mapClicked).to.be(false);
 		expect(map.hasLayer(layer._popup)).to.be(true);
 	});
