@@ -200,18 +200,12 @@ export var emptyImageUrl = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAA
 export var requestFn = window.requestAnimationFrame;
 export var cancelFn = window.cancelAnimationFrame;
 
-// @function requestAnimFrame(fn: Function, context?: Object, immediate?: Boolean): Number
+// @function requestAnimFrame(fn: Function, context?: Object): Number
 // Schedules `fn` to be executed when the browser repaints. `fn` is bound to
-// `context` if given. When `immediate` is set, `fn` is called immediately if
-// the browser doesn't have native support for
-// [`window.requestAnimationFrame`](https://developer.mozilla.org/docs/Web/API/window/requestAnimationFrame),
-// otherwise it's delayed. Returns a request ID that can be used to cancel the request.
+// `context` if given. Returns a request ID that can be used to cancel the request.
+// eslint-disable-next-line no-unused-vars
 export function requestAnimFrame(fn, context, immediate) {
-	if (immediate && requestFn === timeoutDefer) {
-		fn.call(context);
-	} else {
-		return requestFn.call(window, bind(fn, context));
-	}
+	return requestFn.call(window, bind(fn, context));
 }
 
 // @function cancelAnimFrame(id: Number): undefined
