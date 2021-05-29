@@ -747,16 +747,8 @@ export var Map = Evented.extend({
 			throw new Error('Map container is being reused by another instance');
 		}
 
-		try {
-			// throws error in IE6-8
-			delete this._container._leaflet_id;
-			delete this._containerId;
-		} catch (e) {
-			/*eslint-disable */
-			this._container._leaflet_id = undefined;
-			/* eslint-enable */
-			this._containerId = undefined;
-		}
+		delete this._container._leaflet_id;
+		delete this._containerId;
 
 		if (this._locationWatchId !== undefined) {
 			this.stopLocate();
@@ -1106,7 +1098,6 @@ export var Map = Evented.extend({
 		DomUtil.addClass(container, 'leaflet-container' +
 			(Browser.touch ? ' leaflet-touch' : '') +
 			(Browser.retina ? ' leaflet-retina' : '') +
-			(Browser.ielt9 ? ' leaflet-oldie' : '') +
 			(Browser.safari ? ' leaflet-safari' : '') +
 			(this._fadeAnimated ? ' leaflet-fade-anim' : ''));
 
