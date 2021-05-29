@@ -17,21 +17,18 @@ import Browser from '../core/Browser';
 
 // @property TRANSFORM: String
 // Vendor-prefixed transform style name (e.g. `'webkitTransform'` for WebKit).
-export var TRANSFORM = testProp(
-	['transform', 'webkitTransform', 'OTransform', 'MozTransform', 'msTransform']);
+export var TRANSFORM = 'transform';
 
 // webkitTransition comes first because some browser versions that drop vendor prefix don't do
 // the same for the transitionend event, in particular the Android 4.1 stock browser
 
 // @property TRANSITION: String
 // Vendor-prefixed transition style name.
-export var TRANSITION = testProp(
-	['webkitTransition', 'transition', 'OTransition', 'MozTransition', 'msTransition']);
+export var TRANSITION = 'transition';
 
 // @property TRANSITION_END: String
 // Vendor-prefixed transitionend event name.
-export var TRANSITION_END =
-	TRANSITION === 'webkitTransition' || TRANSITION === 'OTransition' ? TRANSITION + 'End' : 'transitionend';
+export var TRANSITION_END = 'transitionend';
 
 
 // @function get(id: String|HTMLElement): HTMLElement
@@ -238,7 +235,7 @@ if ('onselectstart' in document) {
 	};
 } else {
 	var userSelectProperty = testProp(
-		['userSelect', 'WebkitUserSelect', 'OUserSelect', 'MozUserSelect', 'msUserSelect']);
+		['userSelect', 'WebkitUserSelect', 'MozUserSelect', 'msUserSelect']);
 
 	disableTextSelection = function () {
 		if (userSelectProperty) {
