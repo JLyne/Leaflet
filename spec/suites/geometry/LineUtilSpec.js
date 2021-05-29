@@ -148,42 +148,6 @@ describe('LineUtil', () => {
 			map.setView(layer.getCenter(), i);
 		});
 
-		it('computes center of a small line and test it on every zoom - CRS.EPSG3395', () => {
-			map.remove();
-			map = L.map(document.createElement('div'), {center: [55.8, 37.6], zoom: 6, crs: L.CRS.EPSG3395, zoomAnimation: false});
-
-			const latlngs = [[50.49898323576035, 30.509834789772036], [50.49998323576035, 30.509834789772036], [50.49998323576035, 30.509939789772037], [50.49898323576035, 30.509939789772037]];
-
-			const layer = L.polyline(latlngs).addTo(map);
-			let i = 0;
-			function check() {
-				expect(layer.getCenter()).to.be.nearLatLng([50.49998323576035, 30.50989603626345]);
-				i++;
-				if (i < 30) { map.setZoom(i); }
-			}
-
-			map.on('zoomend', check);
-			map.setView(layer.getCenter(), i);
-		});
-
-		it('computes center of a small line and test it on every zoom - CRS.EPSG4326', () => {
-			map.remove();
-			map = L.map(document.createElement('div'), {center: [55.8, 37.6], zoom: 6, crs: L.CRS.EPSG4326, zoomAnimation: false});
-
-			const latlngs = [[50.49898323576035, 30.509834789772036], [50.49998323576035, 30.509834789772036], [50.49998323576035, 30.509939789772037], [50.49898323576035, 30.509939789772037]];
-
-			const layer = L.polyline(latlngs).addTo(map);
-			let i = 0;
-			function check() {
-				expect(layer.getCenter()).to.be.nearLatLng([50.49998323576035, 30.50989603626345]);
-				i++;
-				if (i < 30) { map.setZoom(i); }
-			}
-
-			map.on('zoomend', check);
-			map.setView(layer.getCenter(), i);
-		});
-
 		it('computes center of a small line and test it on every zoom - CRS.Simple', () => {
 			map.remove();
 			map = L.map(document.createElement('div'), {center: [55.8, 37.6], zoom: 6, crs: L.CRS.Simple, zoomAnimation: false});
