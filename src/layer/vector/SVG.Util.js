@@ -1,5 +1,3 @@
-import Browser from '../../core/Browser';
-
 // @namespace SVG; @section
 // There are several static functions which can be called without instantiating L.SVG:
 
