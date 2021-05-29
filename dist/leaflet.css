@@ -26,9 +26,9 @@
 	  -webkit-user-drag: none;
 	}
 /* Prevents IE11 from highlighting tiles in blue */
-.leaflet-tile::selection {
+/*.leaflet-tile::selection {
 	background: transparent;
-}
+}*/
 /* Safari renders non-retina tile on retina better with this, but Chrome is worse */
 .leaflet-safari .leaflet-tile {
 	image-rendering: -webkit-optimize-contrast;
@@ -132,7 +132,7 @@
 .leaflet-control {
 	position: relative;
 	z-index: 800;
-	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
+	/*pointer-events: visiblePainted; !* IE 9-10 doesn't have auto *!*/
 	pointer-events: auto;
 	}
 .leaflet-top,
@@ -251,7 +251,7 @@ svg.leaflet-zoom-animated {
 .leaflet-image-layer.leaflet-interactive,
 .leaflet-pane > svg path.leaflet-interactive,
 svg.leaflet-image-layer.leaflet-interactive path {
-	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
+	/*pointer-events: visiblePainted; !* IE 9-10 doesn't have auto *!*/
 	pointer-events: auto;
 	}
 
@@ -545,7 +545,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 	overflow: auto;
 	}
 
-.leaflet-oldie .leaflet-popup-content-wrapper {
+/*.leaflet-oldie .leaflet-popup-content-wrapper {
 	-ms-zoom: 1;
 	}
 .leaflet-oldie .leaflet-popup-tip {
@@ -561,7 +561,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 .leaflet-oldie .leaflet-popup-content-wrapper,
 .leaflet-oldie .leaflet-popup-tip {
 	border: 1px solid #999;
-	}
+	}*/
 
 
 /* div icon */
