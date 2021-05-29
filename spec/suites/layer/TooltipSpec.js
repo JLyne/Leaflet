@@ -201,11 +201,11 @@ describe('Tooltip', function () {
 
 		layer.bindTooltip('Tooltip');
 
-		happen.mouseover(layer._path, {relatedTarget: map._container});
+		happen.at('mouseover', 210, 210);
 
 		expect(map.hasLayer(layer._tooltip)).to.be(true);
 
-		happen.mouseout(layer._path, {relatedTarget: map._container});
+		happen.at('mouseout', 210, 210);
 		expect(map.hasLayer(layer._tooltip)).to.be(false);
 	});
 
@@ -234,11 +234,11 @@ describe('Tooltip', function () {
 
 		layer.bindTooltip('Tooltip');
 
-		happen.mouseover(layer._path, {relatedTarget: map._container});
+		happen.at('mouseover', 210, 210);
 
 		expect(map.hasLayer(layer._tooltip)).to.be(true);
 
-		happen.mouseout(layer._path, {relatedTarget: map._container});
+		happen.at('mouseout', 210, 210);
 		expect(map.hasLayer(layer._tooltip)).to.be(false);
 	});
 

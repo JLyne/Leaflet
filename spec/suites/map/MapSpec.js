@@ -1121,16 +1121,16 @@ describe("Map", function () {
 		it("DOM events propagate from polygon to map", function () {
 			var spy = sinon.spy();
 			map.on("mousemove", spy);
-			var layer = new L.Polygon([[1, 2], [3, 4], [5, 6]]).addTo(map);
-			happen.mousemove(layer._path);
+			new L.Polygon([[1, 2], [3, 4], [5, 6]]).addTo(map);
+			happen.at('mousemove', 210, 210);
 			expect(spy.calledOnce).to.be.ok();
 		});
 
 		it("DOM events propagate from marker to map", function () {
 			var spy = sinon.spy();
 			map.on("mousemove", spy);
-			var layer = new L.Marker([1, 2]).addTo(map);
-			happen.mousemove(layer._icon);
+			new L.Marker([1, 2]).addTo(map);
+			happen.at('click', 210, 210);
 			expect(spy.calledOnce).to.be.ok();
 		});
 
@@ -1151,7 +1151,7 @@ describe("Map", function () {
 			map.on("mousemove", mapSpy);
 			var layer = new L.Polygon([[1, 2], [3, 4], [5, 6]]).addTo(map);
 			layer.on("mousemove", L.DomEvent.stopPropagation).on("mousemove", layerSpy);
-			happen.mousemove(layer._path);
+			happen.at('mousemove', 210, 210);
 			expect(layerSpy.calledOnce).to.be.ok();
 			expect(mapSpy.called).not.to.be.ok();
 		});
@@ -1165,7 +1165,7 @@ describe("Map", function () {
 			map.on("mouseout", mapSpy);
 			layer.on("mouseout", layerSpy);
 			other.on("mouseout", otherSpy);
-			happen.mouseout(layer._path, {relatedTarget: container});
+			happen.at('mouseout', 210, 210);
 			expect(mapSpy.called).not.to.be.ok();
 			expect(otherSpy.called).not.to.be.ok();
 			expect(layerSpy.calledOnce).to.be.ok();
