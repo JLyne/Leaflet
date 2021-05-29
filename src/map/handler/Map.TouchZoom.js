@@ -98,7 +98,7 @@ export var TouchZoom = Handler.extend({
 		Util.cancelAnimFrame(this._animRequest);
 
 		var moveFn = Util.bind(map._move, map, this._center, this._zoom, {pinch: true, round: false}, undefined);
-		this._animRequest = Util.requestAnimFrame(moveFn, this, true);
+		this._animRequest = Util.requestAnimFrame(moveFn, this);
 
 		DomEvent.preventDefault(e);
 	},
