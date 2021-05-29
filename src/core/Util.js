@@ -197,39 +197,14 @@ export function indexOf(array, el) {
 // mobile devices (by setting image `src` to this string).
 export var emptyImageUrl = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 
-// inspired by https://paulirish.com/2011/requestanimationframe-for-smart-animating/
+export const requestFn = window.requestAnimationFrame;
+export const cancelFn = window.cancelAnimationFrame;
 
-function getPrefixed(name) {
-	return window['webkit' + name] || window['moz' + name] || window['ms' + name];
-}
-
-var lastTime = 0;
-
-// fallback for IE 7-8
-function timeoutDefer(fn) {
-	var time = +new Date(),
-	    timeToCall = Math.max(0, 16 - (time - lastTime));
-
-	lastTime = time + timeToCall;
-	return window.setTimeout(fn, timeToCall);
-}
-
-export var requestFn = window.requestAnimationFrame || getPrefixed('RequestAnimationFrame') || timeoutDefer;
-export var cancelFn = window.cancelAnimationFrame || getPrefixed('CancelAnimationFrame') ||
-		getPrefixed('CancelRequestAnimationFrame') || function (id) { window.clearTimeout(id); };
-
-// @function requestAnimFrame(fn: Function, context?: Object, immediate?: Boolean): Number
+// @function requestAnimFrame(fn: Function, context?): Number
 // Schedules `fn` to be executed when the browser repaints. `fn` is bound to
-// `context` if given. When `immediate` is set, `fn` is called immediately if
-// the browser doesn't have native support for
-// [`window.requestAnimationFrame`](https://developer.mozilla.org/docs/Web/API/window/requestAnimationFrame),
-// otherwise it's delayed. Returns a request ID that can be used to cancel the request.
-export function requestAnimFrame(fn, context, immediate) {
-	if (immediate && requestFn === timeoutDefer) {
-		fn.call(context);
-	} else {
-		return requestFn.call(window, bind(fn, context));
-	}
+// `context` if given.
+export function requestAnimFrame(fn, context) {
+	return requestFn.call(window, fn.bind(context));
 }
 
 // @function cancelAnimFrame(id: Number): undefined
