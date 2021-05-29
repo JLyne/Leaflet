@@ -12,10 +12,7 @@
 <body>
 
 	<div id="map" style="width: 600px; height: 600px; border: 1px solid #ccc"></div>
-	<button onclick="geojsonLayerBounds();">Show GeoJSON layer bounds</button>
 	<button onclick="featureGroupBounds();">Show feature group bounds</button>
-
-	<script src="geojson-sample.js"></script>
 	<script>
 
 		var osmUrl = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -29,25 +26,6 @@
 			zoom: 7,
 			layers: [osm]
 		});
-
-		var geojson = L.geoJson(geojsonSample, {
-
-			style: function (feature) {
-				return {color: feature.properties.color};
-			},
-
-			onEachFeature: function (feature, layer) {
-				var popupText = 'geometry type: ' + feature.geometry.type;
-
-				if (feature.properties.color) {
-					popupText += '<br/>color: ' + feature.properties.color
-				}
-
-				layer.bindPopup(popupText);
-			}
-		});
-
-		geojson.addLayer(new L.Marker(new L.LatLng(2.745530718801952, 105.194091796875)))
 
 		var eye1 = new L.Marker(new L.LatLng(-0.7250783020332547, 101.8212890625));
 		var eye2 = new L.Marker(new L.LatLng(-0.7360637370492077, 103.2275390625));
@@ -63,17 +41,7 @@
 		map.addLayer(eye1).addLayer(eye2).addLayer(nose).addLayer(mouth);
 		featureGroup = new L.FeatureGroup([eye1, eye2, nose, mouth]);
 
-		map.addLayer(geojson);
 		map.addLayer(featureGroup);
-
-		function geojsonLayerBounds() {
-			if (rectangle) {
-				rectangle.setBounds(geojson.getBounds());
-			} else {
-				rectangle = new L.Rectangle(geojson.getBounds());
-				map.addLayer(rectangle);
-			}
-		}
 
 		function featureGroupBounds() {
 			if (rectangle) {

@@ -73,33 +73,9 @@
 		});
 	});
 
-	describe("#toGeoJSON", function () {
-		it('should return valid GeoJSON for a layer with a FeatureCollection', function () {
-			var geoJSON = {
-				"type":"FeatureCollection",
-				"features":[
-					{
-						"type":"Feature",
-						"properties":{},
-						"geometry": {
-							"type":"Point",
-							"coordinates": [78.3984375, 56.9449741808516]
-						}
-					}
-				]
-			};
-
-			var layerGroup = L.layerGroup();
-			var layer = L.geoJSON(geoJSON);
-			layerGroup.addLayer(layer);
-
-			L.geoJson(layerGroup.toGeoJSON());
-		});
-	});
-
-	describe("#invoke", function () {
-		it('should invoke `setOpacity` method on every layer', function () {
-			var layers = [
+	describe('#invoke', () => {
+		it('should invoke `setOpacity` method on every layer', () => {
+			const layers = [
 				L.marker([0, 0]),
 				L.marker([1, 1])
 			];
