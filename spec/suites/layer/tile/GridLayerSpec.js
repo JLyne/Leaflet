@@ -30,7 +30,7 @@ describe('GridLayer', function () {
 			expect(grid.setOpacity(0.5)).to.equal(grid);
 		});
 
-		it('works when map has fadeAnimated=false (IE8 is exempt)', function (done) {
+		it('works when map has fadeAnimated=false', function (done) {
 			map.remove();
 			map = L.map(div, {fadeAnimation: false}).setView([0, 0], 0);
 

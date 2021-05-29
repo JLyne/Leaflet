@@ -88,9 +88,5 @@ function _handlePointer(handler, e) {
 }
 
 function _onPointerStart(handler, e) {
-	// IE10 specific: MsTouch needs preventDefault. See #2000
-	if (e.MSPOINTER_TYPE_TOUCH && e.pointerType === e.MSPOINTER_TYPE_TOUCH) {
-		DomEvent.preventDefault(e);
-	}
 	_handlePointer(handler, e);
 }
