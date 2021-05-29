@@ -17,19 +17,11 @@
 			osmAttrib = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 			osm = L.tileLayer(osmUrl, {maxZoom: 18, attribution: osmAttrib});
 
-		var svg = L.svg();
-
-		var map = new L.Map('map', {layers: [osm], renderer: svg});
+		var canvas = L.canvas();
+		var map = new L.Map('map', {layers: [osm], renderer: canvas});
 
 		map.addLayer(L.marker(route[0]));
 		map.addLayer(L.marker(route[route.length - 1]));
-
-		var canvas = L.canvas();
-
-		var poly = L.polyline([
-			[[60, 30], [60, 50], [40, 50]],
-			[[20, 50], [20, 70], [0, 70]]
-		], {color: 'red'}).addTo(map).bindPopup('Hello SVG');
 
 		var path = L.polygon([
 			[route, [[50.5, 30.5], [50.5, 40], [40, 40]]],
@@ -52,7 +44,6 @@
 			'circle': circle,
 			'circleMarker': circleMarker,
 			'canvas': canvas,
-			'svg': svg,
 		}, {collapsed: false});
 		map.addControl(layersControl);
 	</script>
