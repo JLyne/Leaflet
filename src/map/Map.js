@@ -1136,7 +1136,7 @@ export var Map = Evented.extend({
 		// Pane for `GridLayer`s and `TileLayer`s
 		this.createPane('tilePane');
 		// @pane overlayPane: HTMLElement = 400
-		// Pane for vectors (`Path`s, like `Polyline`s and `Polygon`s) and `ImageOverlay`s
+		// Pane for vectors (`Path`s, like `Polyline`s and `Polygon`s)
 		this.createPane('overlayPane');
 		// @pane shadowPane: HTMLElement = 500
 		// Pane for overlay shadows (e.g. `Marker` shadows)
