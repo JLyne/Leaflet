@@ -10,7 +10,6 @@ This file just defines the order of the classes in the docs.
 @class Tooltip
 
 @class TileLayer
-@class ImageOverlay
 
 @class Path
 @class Polyline
