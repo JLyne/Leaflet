@@ -12,7 +12,7 @@
 		<script src="../../dist/leaflet-src.js"></script>
 	</head>
 	<body>
-		This page tests if the cursors for dragging the map and the markers behave as expected. The left marker is draggable, the right one is not.
+		This page tests if the cursors for dragging the map behave as expected.
 
 		<hr>
 
@@ -30,7 +30,6 @@
 					maxZoom : 18
 				}).addTo(map);
 
-				var draggableMarker = L.marker([20, -120.3], {draggable: true} ).addTo(map);
 				var fixedMarker     = L.marker([50.5, 30.5], {draggable: false}).addTo(map);
 			}
 
