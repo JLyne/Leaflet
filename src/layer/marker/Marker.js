@@ -5,13 +5,12 @@ import {toLatLng as latLng} from '../../geo/LatLng';
 import {toPoint as point} from '../../geometry/Point';
 import * as DomUtil from '../../dom/DomUtil';
 import * as DomEvent from '../../dom/DomEvent';
-import {MarkerDrag} from './Marker.Drag';
 
 /*
  * @class Marker
  * @inherits Interactive layer
  * @aka L.Marker
- * L.Marker is used to display clickable/draggable icons on the map. Extends `Layer`.
+ * L.Marker is used to display clickable icons on the map. Extends `Layer`.
  *
  * @example
  *
@@ -83,15 +82,6 @@ export var Marker = Layer.extend({
 		// visible within the map's bounds
 		autoPanOnFocus: true,
 
-		// @section Draggable marker options
-		// @option draggable: Boolean = false
-		// Whether the marker is draggable with mouse/touch or not.
-		draggable: false,
-
-		// @option autoPan: Boolean = false
-		// Whether to pan the map when dragging this marker near its edge or not.
-		autoPan: false,
-
 		// @option autoPanPadding: Point = Point(50, 50)
 		// Distance (in pixels to the left/right and to the top/bottom) of the
 		// map edge to start panning the map.
@@ -124,12 +114,6 @@ export var Marker = Layer.extend({
 	},
 
 	onRemove: function (map) {
-		if (this.dragging && this.dragging.enabled()) {
-			this.options.draggable = true;
-			this.dragging.removeHooks();
-		}
-		delete this.dragging;
-
 		if (this._zoomAnimated) {
 			map.off('zoomanim', this._animateZoom, this);
 		}
@@ -339,20 +323,6 @@ export var Marker = Layer.extend({
 		DomUtil.addClass(this._icon, 'leaflet-interactive');
 
 		this.addInteractiveTarget(this._icon);
-
-		if (MarkerDrag) {
-			var draggable = this.options.draggable;
-			if (this.dragging) {
-				draggable = this.dragging.enabled();
-				this.dragging.disable();
-			}
-
-			this.dragging = new MarkerDrag(this);
-
-			if (draggable) {
-				this.dragging.enable();
-			}
-		}
 	},
 
 	// @method setOpacity(opacity: Number): this

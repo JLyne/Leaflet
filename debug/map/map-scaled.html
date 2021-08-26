@@ -48,16 +48,8 @@
 
 		var mapContainer = map.getContainer();
 
-		var marker = L.marker([50.5, 30.51], {
-			draggable: true
-		}).addTo(map);
-
 		map.on('drag', function (event) {
 			console.log('map:');
-			console.log(L.DomEvent.getMousePosition(event.originalEvent, mapContainer));
-		});
-		marker.on('drag', function (event) {
-			console.log('marker:');
 			console.log(L.DomEvent.getMousePosition(event.originalEvent, mapContainer));
 		});
 	</script>

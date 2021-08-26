@@ -83,43 +83,6 @@ describe("Marker", function () {
 			expect(afterIcon.src).to.contain(icon2._getIconUrl('icon'));
 		});
 
-		it("preserves draggability", function () {
-			var marker = L.marker([0, 0], {icon: icon1});
-			map.addLayer(marker);
-
-			marker.dragging.disable();
-			marker.setIcon(icon2);
-
-			expect(marker.dragging.enabled()).to.be(false);
-
-			marker.dragging.enable();
-
-			marker.setIcon(icon1);
-
-			expect(marker.dragging.enabled()).to.be(true);
-
-			map.removeLayer(marker);
-			map.addLayer(marker);
-
-			expect(marker.dragging.enabled()).to.be(true);
-
-			map.removeLayer(marker);
-			// Dragging is still enabled, we should be able to disable it,
-			// even if marker is off the map.
-			expect(marker.dragging).to.be(undefined);
-			marker.options.draggable = false;
-			map.addLayer(marker);
-
-			map.removeLayer(marker);
-
-			// We should also be able to enable dragging while off the map
-			expect(marker.dragging).to.be(undefined);
-			marker.options.draggable = true;
-
-			map.addLayer(marker);
-			expect(marker.dragging.enabled()).to.be(true);
-		});
-
 		it("changes the DivIcon to another DivIcon, while re-using the DIV element", function () {
 			var marker = L.marker([0, 0], {icon: L.divIcon({html: 'Inner1Text'})});
 			map.addLayer(marker);
