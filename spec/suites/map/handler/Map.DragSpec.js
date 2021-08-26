@@ -227,46 +227,6 @@ describe('Map.Drag', () => {
 				.down().moveBy(5, 0, 20).moveBy(20, 20, 100).up();
 		});
 
-		it('does not trigger preclick nor click when dragging a marker', (done) => {
-			container.style.width = container.style.height = '600px';
-			map = L.map(container, {
-				dragging: true,
-				inertia: false
-			});
-			map.setView([0, 0], 1);
-			const marker = L.marker(map.getCenter(), {draggable: true}).addTo(map);
-			const clickSpy = sinon.spy();
-			const preclickSpy = sinon.spy();
-			const markerDragSpy = sinon.spy();
-			const mapDragSpy = sinon.spy();
-			map.on('click', clickSpy);
-			map.on('preclick', preclickSpy);
-			map.on('drag', mapDragSpy);
-			marker.on('click', clickSpy);
-			marker.on('preclick', preclickSpy);
-			marker.on('drag', markerDragSpy);
-
-			const hand = new Hand({
-				timing: 'fastframe',
-				onStop() {
-					// A real user scenario would trigger a click on mouseup.
-					// We want to be sure we are cancelling it after a drag.
-					UIEventSimulator.fire('click', marker._icon);
-					expect(markerDragSpy.called).to.be(true);
-					expect(mapDragSpy.called).to.be(false);
-					expect(clickSpy.called).to.be(false);
-					expect(preclickSpy.called).to.be(false);
-					done();
-				}
-			});
-			const mouse = hand.growFinger('mouse');
-
-			// We move 5 pixels first to overcome the 3-pixel threshold of
-			// L.Draggable.
-			mouse.moveTo(300, 280, 0)
-				.down().moveBy(5, 0, 20).moveBy(50, 50, 100).up();
-		});
-
 		it('does not change the center of the map when drag is disabled on click', (done) => {
 			map = L.map(container, {
 				dragging: true,
