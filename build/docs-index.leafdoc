@@ -15,8 +15,6 @@ This file just defines the order of the classes in the docs.
 @class Polyline
 @class Polygon
 @class Rectangle
-@class Circle
-@class CircleMarker
 @class Canvas
 
 @class LayerGroup

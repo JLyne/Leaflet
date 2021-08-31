@@ -119,7 +119,7 @@ describe('Canvas', function () {
 
 		it("does fire mousedown on layer after dragging map", function (done) { // #7775
 			var spy = sinon.spy();
-			var circle = L.circle(p2ll(300, 300)).addTo(map);
+			var circle = L.polygon([p2ll(290, 290), p2ll(290, 310), p2ll(310, 310), p2ll(310, 290)]).addTo(map);
 			circle.on('mousedown', spy);
 
 			var hand = new Hand({
@@ -163,38 +163,6 @@ describe('Canvas', function () {
 				dashArray: "5,5"
 			});
 		});
-	});
-
-	it('removes vector on next animation frame', function (done) {
-		var layer = L.circle([0, 0]).addTo(map),
-		    layerId = L.stamp(layer),
-		    canvas = map.getRenderer(layer);
-
-		expect(canvas._layers).to.have.property(layerId);
-
-		map.removeLayer(layer);
-		// Defer check due to how Canvas renderer manages layer removal.
-		L.Util.requestAnimFrame(function () {
-			expect(canvas._layers).to.not.have.property(layerId);
-			done();
-		}, this);
-	});
-
-	it('adds vectors even if they have been removed just before', function (done) {
-		var layer = L.circle([0, 0]).addTo(map),
-		    layerId = L.stamp(layer),
-		    canvas = map.getRenderer(layer);
-
-		expect(canvas._layers).to.have.property(layerId);
-
-		map.removeLayer(layer);
-		map.addLayer(layer);
-		expect(canvas._layers).to.have.property(layerId);
-		// Re-perform a deferred check due to how Canvas renderer manages layer removal.
-		L.Util.requestAnimFrame(function () {
-			expect(canvas._layers).to.have.property(layerId);
-			done();
-		}, this);
 	});
 
 	describe('#bringToBack', function () {
