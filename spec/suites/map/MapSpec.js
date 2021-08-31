@@ -1890,11 +1890,12 @@ describe('Map', () => {
 			map.on('contextmenu', (e) => {
 				spy(e.originalEvent.defaultPrevented);
 			});
-			const marker = L.circleMarker([0, 0]).addTo(map);
+			const marker = L.polygon([[-10, -10], [10, -10], [10, 10], [-10, 10]]).addTo(map);
 
 			UIEventSimulator.fireAt('contextmenu', 0, 0); // first
 
-			UIEventSimulator.fireAt('contextmenu', marker._point.x, marker._point.y); // second  (#5995)
+			const point = map.latLngToLayerPoint([0, 0]);
+			UIEventSimulator.fireAt('contextmenu', point.x, point.y); // second  (#5995)
 
 			expect(spy.callCount).to.be(2);
 			expect(spy.firstCall.lastArg).to.be.ok();
