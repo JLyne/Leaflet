@@ -16,7 +16,6 @@
 
 	<div id="map"></div>
 	<button id="populate-markers">Populate with markers</button>
-	<button id="populate-circles">Populate with circles</button>
 	<button id="populate-lines">Populate with lines</button>
 	<button id="populate-polygons">Populate with polygons</button>
 
@@ -51,13 +50,6 @@
 			return false;
 		}
 
-		function populateCircle() {
-			for (var i = 0; i < 5; i++) {
-				L.circleMarker(getRandomLatLng(map.getBounds())).addTo(markers);
-			}
-			return false;
-		}
-
 		function populateLine() {
 			var lineCoords = [];
 			for (var i = 0; i < 10; i++) {
@@ -79,14 +71,12 @@
 		markers.bindPopup("<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.</p><p>Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque.</p>").addTo(map);
 
 		L.DomUtil.get('populate-markers').onclick = populateMarker;
-		L.DomUtil.get('populate-circles').onclick = populateCircle;
 		L.DomUtil.get('populate-lines').onclick = populateLine;
 		L.DomUtil.get('populate-polygons').onclick = populatePoly;
 
 		function logEvent(e) { console.log(e.type); }
 
 		populateMarker();
-		populateCircle();
 		populateLine();
 		populatePoly();
 		// map.on('click', logEvent);

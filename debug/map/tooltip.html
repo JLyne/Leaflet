@@ -38,10 +38,6 @@
 		L.polygon([[41.18, 9.42], [41.17, 9.40], [41.19, 9.38]]).addTo(map).bindTooltip('Permanent polygon tooltip', {permanent: true});
 		L.marker([41.20, 9.4307]).addTo(map).bindTooltip('tooltip on the left', {direction: 'left'});
 		L.marker([41.206, 9.44]).addTo(map).bindTooltip('click me, I have a popup', {permanent: true, interactive: true}).bindPopup('See?');
-		L.circleMarker([41.206, 9.48], {color: 'Chocolate', radius: 12}).addTo(map).bindTooltip('Hello Left World', {direction: 'left'});
-		L.circleMarker([41.20, 9.50], {color: 'Chocolate', radius: 12}).addTo(map).bindTooltip('Hello top World', {direction: 'top', permanent: true});
-		L.circleMarker([41.20, 9.47], {color: 'Tomato', radius: 10}).addTo(map).bindTooltip('Seems I am centered', {direction: 'center', permanent: true, interactive: true}).bindPopup('Yeah');
-		L.circleMarker([41.195, 9.47], {color: 'Tomato', radius: 10}).addTo(map).bindTooltip('Me too', {direction: 'center'}).bindPopup('Yeah');
 		var icon = L.divIcon({
 			className: 'my-div-icon',
 			html: '<p>A div icon</p>',
