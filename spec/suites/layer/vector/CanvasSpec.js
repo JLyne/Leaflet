@@ -157,41 +157,9 @@ describe('Canvas', function () {
 		});
 	});
 
-	it('removes vector on next animation frame', function (done) {
-		var layer = L.circle([0, 0]).addTo(map),
-		    layerId = L.stamp(layer),
-		    canvas = map.getRenderer(layer);
-
-		expect(canvas._layers).to.have.property(layerId);
-
-		map.removeLayer(layer);
-		// Defer check due to how Canvas renderer manages layer removal.
-		L.Util.requestAnimFrame(function () {
-			expect(canvas._layers).to.not.have.property(layerId);
-			done();
-		}, this);
-	});
-
-	it('adds vectors even if they have been removed just before', function (done) {
-		var layer = L.circle([0, 0]).addTo(map),
-		    layerId = L.stamp(layer),
-		    canvas = map.getRenderer(layer);
-
-		expect(canvas._layers).to.have.property(layerId);
-
-		map.removeLayer(layer);
-		map.addLayer(layer);
-		expect(canvas._layers).to.have.property(layerId);
-		// Re-perform a deferred check due to how Canvas renderer manages layer removal.
-		L.Util.requestAnimFrame(function () {
-			expect(canvas._layers).to.have.property(layerId);
-			done();
-		}, this);
-	});
-
-	describe('#bringToBack', function () {
-		it('is a no-op for layers not on a map', function () {
-			var path = L.polyline([[1, 2], [3, 4], [5, 6]]);
+	describe('#bringToBack', () => {
+		it('is a no-op for layers not on a map', () => {
+			const path = L.polyline([[1, 2], [3, 4], [5, 6]]);
 			expect(path.bringToBack()).to.equal(path);
 		});
 

@@ -32,33 +32,6 @@
         map.fitBounds(new L.LatLngBounds([51,7],[51,7]));
         drawTestLine();
 
-        function drawTestLine() {
-            var lat = 51;
-            var long = 7;
-            for (var i = 0; i < 50; i++) {
-
-                var myCircle = new L.Circle(new L.LatLng(lat, long),3);
-                myCircle.on('click',
-                    function (e) {
-                        popup = new L.Popup();
-                        popup.setLatLng(this.getLatLng());
-
-                        var popuptxt = "Hello!";
-                        alert("I am the click function");
-                                popup.setContent(popuptxt);
-
-                                map.openPopup(popup);
-
-
-                    });
-                myLayerGroup.addLayer(myCircle);
-                    lat = lat + 0.0001;
-                    long = long + 0.0001;
-
-            }
-            map.addLayer(myLayerGroup);
-        };
-
         L.DomEvent.on(L.DomUtil.get('b1'), 'click', function () {
           map.addLayer(myLayerGroup);
         });

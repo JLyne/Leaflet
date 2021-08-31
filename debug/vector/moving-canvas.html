@@ -28,9 +28,6 @@
 
 		var markers = [];
 		var colors = ['red', 'green', 'blue', 'purple', 'cyan', 'yellow'];
-		for (var i = 0; i < 20; i++) {
-			markers.push(L.circleMarker([50.5, 30.51], {color: colors[i % colors.length]}).addTo(map));
-		}
 
 		function update() {
 			var t = new Date().getTime() / 1000;
