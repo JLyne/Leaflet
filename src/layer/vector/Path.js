@@ -7,7 +7,7 @@ import * as Util from '../../core/Util';
  * @inherits Interactive layer
  *
  * An abstract class that contains options and constants shared between vector
- * overlays (Polygon, Polyline, Circle). Do not use it directly. Extends `Layer`.
+ * overlays (Polygon, Polyline). Do not use it directly. Extends `Layer`.
  */
 
 export var Path = Layer.extend({

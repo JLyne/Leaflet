@@ -45,11 +45,6 @@
 
 			function makeFeatures(i) {
 				L.marker([50.505-i*0.005, 30.51]).addTo(map);
-				L.circleMarker([50.505-i*0.005, 30.51], { radius: 30, pane: panes[i] })
-					.bindPopup(function(layer) {
-						return 'Pane: ' + panes[i];
-					})
-					.addTo(map);
 			}
 
 			for (var i = 0; i < 3; i++)
