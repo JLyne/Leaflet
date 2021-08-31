@@ -12,7 +12,6 @@
 <body>
 	<div id="map" style="width: 800px; height: 600px; border: 1px solid #ccc"></div>
 	<button onclick="group.removeLayer(path)">Remove path</button>
-	<button onclick="group.removeLayer(circle)">Remove circle</button>
 	<button onclick="group.clearLayers()">Remove all layers</button>
 
 
@@ -33,22 +32,6 @@
 		var group = new L.LayerGroup();
 
 		map.fitBounds(new L.LatLngBounds(latlngs));
-
-		var circleLocation = new L.LatLng(51.508, -0.11),
-		circleOptions = {
-			color: 'red',
-			fillColor: 'yellow',
-			fillOpacity: 0.7,
-			renderer: canvas
-		};
-
-		var circle = new L.Circle(circleLocation, 500000, circleOptions),
-			circleMarker = new L.CircleMarker(circleLocation, {fillColor: 'blue', fillOpacity: 1, stroke: false});
-
-		group.addLayer(circle).addLayer(circleMarker);
-
-		circle.bindPopup('I am a circle');
-		circleMarker.bindPopup('I am a circle marker');
 
 		group.addLayer(path);
 		path.bindPopup('I am a polyline');
@@ -88,14 +71,6 @@
 		group.addLayer(line);
 
 		polygon.bindPopup('I am a polygon');
-
-		var circleMarker2 = new L.CircleMarker([25.5, 0], {
-			dashArray: '5, 5',
-			fillColor: 'red',
-			color: 'green',
-			renderer: canvas
-		});
-		group.addLayer(circleMarker2);
 
 		map.addLayer(group);
 
