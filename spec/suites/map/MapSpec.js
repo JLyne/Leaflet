@@ -1276,11 +1276,13 @@ describe("Map", function () {
 			map.on('contextmenu', function (e) {
 				spy(e.originalEvent.defaultPrevented);
 			});
-			var marker = L.circleMarker([0, 0]).addTo(map);
+			var marker = L.polygon([[-10, -10], [10, -10], [10, 10], [-10, 10]]).addTo(map);
 
 			happen.at('contextmenu', 0, 0); // first
 
-			happen.at('contextmenu', marker._point.x, marker._point.y); // second  (#5995)
+			var point = map.latLngToLayerPoint([0, 0]);
+
+			happen.at('contextmenu', point.x, point.y); // second  (#5995)
 
 			expect(spy.callCount).to.be(2);
 			expect(spy.firstCall.lastArg).to.be.ok();
