@@ -33,7 +33,6 @@ import {Bounds} from '../../geometry/Bounds';
  * var map = L.map('map');
  * var myRenderer = L.canvas({ padding: 0.5 });
  * var line = L.polyline( coordinates, { renderer: myRenderer } );
- * var circle = L.circle( center, { renderer: myRenderer } );
  * ```
  */
 
@@ -303,30 +302,6 @@ export const Canvas = Renderer.extend({
 		this._fillStroke(ctx, layer);
 
 		// TODO optimization: 1 fill/stroke for all features with equal style instead of 1 for each feature
-	},
-
-	_updateCircle(layer) {
-
-		if (!this._drawing || layer._empty()) { return; }
-
-		const p = layer._point,
-		    ctx = this._ctx,
-		    r = Math.max(Math.round(layer._radius), 1),
-		    s = (Math.max(Math.round(layer._radiusY), 1) || r) / r;
-
-		if (s !== 1) {
-			ctx.save();
-			ctx.scale(1, s);
-		}
-
-		ctx.beginPath();
-		ctx.arc(p.x, p.y / s, r, 0, Math.PI * 2, false);
-
-		if (s !== 1) {
-			ctx.restore();
-		}
-
-		this._fillStroke(ctx, layer);
 	},
 
 	_fillStroke(ctx, layer) {

@@ -199,53 +199,6 @@ describe('Tooltip', () => {
 		expect(spy.calledOnce).to.be(true);
 	});
 
-	it('can be forced on top direction', () => {
-		const layer = L.circleMarker(center).addTo(map);
-		const spy = sinon.spy();
-		layer.on('click', spy);
-
-		layer.bindTooltip('A tooltip that should be displayed on the top', {permanent: true, direction: 'top', interactive: true});
-		expect(map.hasLayer(layer._tooltip)).to.be(true);
-		UIEventSimulator.fireAt('click', 200, 180);  // Marker is on the map center, which is 400px large.
-		expect(spy.calledOnce).to.be(true);
-	});
-
-	it('honours offset on top direction', () => {
-		const layer = L.circleMarker(center).addTo(map);
-		const spy = sinon.spy();
-		layer.on('click', spy);
-
-		layer.bindTooltip('A tooltip that should be displayed on the top', {permanent: true, direction: 'top', interactive: true, offset: [-20, -20]});
-		UIEventSimulator.fireAt('click', 200, 180);
-		expect(spy.calledOnce).to.be(false);
-		UIEventSimulator.fireAt('click', 180, 150);
-		expect(spy.calledOnce).to.be(true);
-	});
-
-	it('can be forced on bottom direction', () => {
-		const layer = L.circleMarker(center).addTo(map);
-		const spy = sinon.spy();
-		layer.on('click', spy);
-
-		layer.bindTooltip('A tooltip that should be displayed on the top', {permanent: true, direction: 'bottom', interactive: true});
-		expect(map.hasLayer(layer._tooltip)).to.be(true);
-		UIEventSimulator.fireAt('click', 200, 220);  // Marker is on the map center, which is 400px large.
-		expect(spy.calledOnce).to.be(true);
-	});
-
-	it('honours offset on bottom direction', () => {
-		const layer = L.circleMarker(center).addTo(map);
-		const spy = sinon.spy();
-		layer.on('click', spy);
-
-		layer.bindTooltip('A tooltip that should be displayed on the top', {permanent: true, direction: 'bottom', interactive: true, offset: [20, 20]});
-		expect(map.hasLayer(layer._tooltip)).to.be(true);
-		UIEventSimulator.fireAt('click', 200, 220);
-		expect(spy.calledOnce).to.be(false);
-		UIEventSimulator.fireAt('click', 220, 230);
-		expect(spy.calledOnce).to.be(true);
-	});
-
 	it('can be forced on center', () => {
 		const layer = L.marker(center).addTo(map);
 		const spy = sinon.spy();
