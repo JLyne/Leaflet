@@ -359,8 +359,8 @@ describe('Tooltip', function () {
 		layer.closeTooltip();
 	});
 
-	it("opens a tooltip and follow the mouse (sticky)", function () {
-		var layer = L.rectangle([[58, 39.7], [54, 35.3]]).addTo(map);
+	it('opens a tooltip and follow the mouse (sticky)', () => {
+		const layer = L.polygon([[58, 39.7], [58, 35.3], [54, 35.3], [54, 39.7]]).addTo(map);
 		layer.bindTooltip('Sticky', {sticky: true}).openTooltip();
 		var tooltip = layer.getTooltip();
 		expect(tooltip.getLatLng().equals(layer.getCenter())).to.be(true);
@@ -370,8 +370,8 @@ describe('Tooltip', function () {
 		expect(tooltip.getLatLng().equals(latlng)).to.be(true);
 	});
 
-	it("opens a permanent tooltip and follow the mouse (sticky)", function (done) {
-		var layer = L.rectangle([[58, 39.7], [54, 35.3]]).addTo(map);
+	it('opens a permanent tooltip and follow the mouse (sticky)', (done) => {
+		const layer = L.polygon([[58, 39.7], [58, 35.3], [54, 35.3], [54, 39.7]]).addTo(map);
 		layer.bindTooltip('Sticky', {sticky: true, permanent: true}).openTooltip();
 		var tooltip = layer.getTooltip();
 		expect(tooltip.getLatLng().equals(layer.getCenter())).to.be(true);
