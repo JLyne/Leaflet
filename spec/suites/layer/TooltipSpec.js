@@ -354,7 +354,7 @@ describe('Tooltip', () => {
 	});
 
 	it('opens a tooltip and follow the mouse (sticky)', () => {
-		const layer = L.rectangle([[58, 39.7], [54, 35.3]]).addTo(map);
+		const layer = L.polygon([[58, 39.7], [58, 35.3], [54, 35.3], [54, 39.7]]).addTo(map);
 		layer.bindTooltip('Sticky', {sticky: true}).openTooltip();
 		const tooltip = layer.getTooltip();
 		expect(tooltip.getLatLng().equals(layer.getCenter())).to.be(true);
@@ -365,7 +365,7 @@ describe('Tooltip', () => {
 	});
 
 	it('opens a permanent tooltip and follow the mouse (sticky)', (done) => {
-		const layer = L.rectangle([[58, 39.7], [54, 35.3]]).addTo(map);
+		const layer = L.polygon([[58, 39.7], [58, 35.3], [54, 35.3], [54, 39.7]]).addTo(map);
 		layer.bindTooltip('Sticky', {sticky: true, permanent: true}).openTooltip();
 		const tooltip = layer.getTooltip();
 		expect(tooltip.getLatLng().equals(layer.getCenter())).to.be(true);
