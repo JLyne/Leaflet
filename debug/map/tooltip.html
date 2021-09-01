@@ -38,13 +38,6 @@
 		L.polygon([[41.18, 9.42], [41.17, 9.40], [41.19, 9.38]]).addTo(map).bindTooltip('Permanent polygon tooltip', {permanent: true});
 		L.marker([41.20, 9.4307]).addTo(map).bindTooltip('tooltip on the left', {direction: 'left'});
 		L.marker([41.206, 9.44]).addTo(map).bindTooltip('click me, I have a popup', {permanent: true, interactive: true}).bindPopup('See?');
-		var icon = L.divIcon({
-			className: 'my-div-icon',
-			html: '<p>A div icon</p>',
-			iconSize: [50, 50]
-		});
-		L.marker([41.22, 9.48], {icon: icon}).addTo(map).bindTooltip('A div icon tooltip following mouse', {sticky: true, direction: 'auto'});
-		L.marker([41.23, 9.47], {icon: icon}).addTo(map).bindTooltip('A div icon tooltip with custom offset', {direction: 'top', offset: [-25, -25]});
 		L.marker([41.19, 9.43]).addTo(map).bindTooltip('Clickable marker tooltip', {permanent: true, interactive: true}).on('click', function () { alert('clicked!'); });
 
 		var marker1 = L.marker([41.18, 9.45], {description: 'Marker 1'});

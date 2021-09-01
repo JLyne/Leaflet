@@ -90,36 +90,16 @@
 
 	for (var i=0; i<=1000; i+=100) {
 		// Right label
-		L.marker([i, 1000], { icon: L.divIcon({
-			iconSize: [40, 20],
-			iconAnchor: [-2, 10],
-			html: i,
-			className: 'label-right'
-		}) }).addTo(map);
+		L.marker([i, 1000]).addTo(map);
 
 		// Left label
-		L.marker([i, 0], { icon: L.divIcon({
-			iconSize: [40, 20],
-			iconAnchor: [42, 10],
-			html: i,
-			className: 'label-left'
-		}) }).addTo(map);
+		L.marker([i, 0]).addTo(map);
 
 		// Top label
-		L.marker([1000, i], { icon: L.divIcon({
-			iconSize: [40, 20],
-			iconAnchor: [20, 22],
-			html: i,
-			className: 'label-top'
-		}) }).addTo(map);
+		L.marker([1000, i]).addTo(map);
 
 		// Bottom label
-		L.marker([0, i], { icon: L.divIcon({
-			iconSize: [40, 20],
-			iconAnchor: [20, -2],
-			html: i,
-			className: 'label-bottom'
-		}) }).addTo(map);
+		L.marker([0, i]).addTo(map);
 	}
 
 	map.fitBounds(bounds);

@@ -236,42 +236,6 @@ describe('Popup', () => {
 		expect(spy.callCount).to.be(2);
 	});
 
-	it('should take into account icon popupAnchor option', () => {
-		const latlng = center;
-		const offset = L.point(20, 30);
-
-		const autoPanBefore = L.Popup.prototype.options.autoPan;
-		L.Popup.prototype.options.autoPan = false;
-		const popupAnchorBefore = L.Icon.Default.prototype.options.popupAnchor;
-		L.Icon.Default.prototype.options.popupAnchor = [0, 0];
-
-		const icon = L.divIcon({popupAnchor: offset});
-		const marker1 = L.marker(latlng);
-		const marker2 = L.marker(latlng, {icon});
-
-		marker1.bindPopup('Popup').addTo(map);
-		marker1.openPopup();
-		const defaultLeft = L.DomUtil.getPosition(marker1._popup._container).x;
-		const defaultTop = L.DomUtil.getPosition(marker1._popup._container).y;
-		marker2.bindPopup('Popup').addTo(map);
-		marker2.openPopup();
-		let offsetLeft = L.DomUtil.getPosition(marker2._popup._container).x;
-		let offsetTop = L.DomUtil.getPosition(marker2._popup._container).y;
-		expect(offsetLeft - offset.x).to.eql(defaultLeft);
-		expect(offsetTop - offset.y).to.eql(defaultTop);
-
-		// Now retry passing a popup instance to bindPopup
-		marker2.bindPopup(L.popup());
-		marker2.openPopup();
-		offsetLeft = L.DomUtil.getPosition(marker2._popup._container).x;
-		offsetTop = L.DomUtil.getPosition(marker2._popup._container).y;
-		expect(offsetLeft - offset.x).to.eql(defaultLeft);
-		expect(offsetTop - offset.y).to.eql(defaultTop);
-
-		L.Popup.prototype.options.autoPan = autoPanBefore;
-		L.Icon.Default.prototype.options.popupAnchor = popupAnchorBefore;
-	});
-
 	it('prevents an underlying map click for Layer', () => {
 		const layer = L.polygon([center, [55.9, 37.7], [56.0, 37.8]]).addTo(map);
 		layer.bindPopup('layer popup');
