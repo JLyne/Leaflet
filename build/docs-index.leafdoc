@@ -15,7 +15,6 @@ This file just defines the order of the classes in the docs.
 @class Path
 @class Polyline
 @class Polygon
-@class Rectangle
 @class Canvas
 
 @class LayerGroup
