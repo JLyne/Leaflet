@@ -83,59 +83,6 @@ describe('Marker', () => {
 			expect(afterIcon.src).to.contain(icon2._getIconUrl('icon'));
 		});
 
-		it('changes the DivIcon to another DivIcon, while re-using the DIV element', ()  => {
-			const marker = L.marker([0, 0], {icon: L.divIcon({html: 'Inner1Text'})});
-			map.addLayer(marker);
-
-			const beforeIcon = marker._icon;
-			marker.setIcon(L.divIcon({html: 'Inner2Text'}));
-			const afterIcon = marker._icon;
-
-			expect(beforeIcon).to.be(afterIcon); // Check that the <DIV> element is re-used
-			expect(afterIcon.innerHTML).to.contain('Inner2Text');
-		});
-
-		it('removes text when changing to a blank DivIcon', () => {
-			const marker = L.marker([0, 0], {icon: L.divIcon({html: 'Inner1Text'})});
-			map.addLayer(marker);
-
-			marker.setIcon(L.divIcon());
-
-			expect(marker._icon.innerHTML).to.not.contain('Inner1Text');
-		});
-
-		it('changes a DivIcon to an image', () => {
-			const marker = L.marker([0, 0], {icon: L.divIcon({html: 'Inner1Text'})});
-			map.addLayer(marker);
-			const oldIcon = marker._icon;
-
-			marker.setIcon(icon1);
-
-			expect(oldIcon).to.not.be(marker._icon); // Check that the _icon is NOT re-used
-			expect(oldIcon.parentNode).to.be(null);
-
-			if (L.Browser.retina) {
-				expect(marker._icon.src).to.contain('marker-icon-2x.png');
-			} else {
-				expect(marker._icon.src).to.contain('marker-icon.png');
-			}
-			expect(marker._icon.parentNode).to.be(map._panes.markerPane);
-		});
-
-		it('changes an image to a DivIcon', () => {
-			const marker = L.marker([0, 0], {icon: icon1});
-			map.addLayer(marker);
-			const oldIcon = marker._icon;
-
-			marker.setIcon(L.divIcon({html: 'Inner1Text'}));
-
-			expect(oldIcon).to.not.be(marker._icon); // Check that the _icon is NOT re-used
-			expect(oldIcon.parentNode).to.be(null);
-
-			expect(marker._icon.innerHTML).to.contain('Inner1Text');
-			expect(marker._icon.parentNode).to.be(map._panes.markerPane);
-		});
-
 		it('reuses the icon/shadow when changing icon', () => {
 			const marker = L.marker([0, 0], {icon: icon1});
 			map.addLayer(marker);
@@ -157,31 +104,6 @@ describe('Marker', () => {
 			const icon = marker._icon;
 			expect(icon.hasAttribute('alt')).to.be(true);
 			expect(icon.alt).to.be('Marker');
-		});
-
-		it('doesn\'t set the alt attribute for DivIcons', () => {
-			const marker = L.marker([0, 0], {icon: L.divIcon(), alt: 'test'});
-			map.addLayer(marker);
-			const icon = marker._icon;
-			expect(icon.hasAttribute('alt')).to.be(false);
-		});
-
-		it('pan map to focus marker', () => {
-			const marker = L.marker([70, 0], {icon: L.divIcon()});
-			map.addLayer(marker);
-
-			expect(() => {
-				marker._icon.focus();
-			}).to.not.throwException();
-		});
-
-		it('pan map to focus marker with no iconSize', () => {
-			const marker = L.marker([70, 0], {icon: L.divIcon({iconSize: null})});
-			map.addLayer(marker);
-
-			expect(() => {
-				marker._panOnFocus();
-			}).to.not.throwException();
 		});
 	});
 
@@ -218,46 +140,6 @@ describe('Marker', () => {
 			UIEventSimulator.fire('click', marker._icon);
 
 			expect(spy.called).to.be.ok();
-		});
-
-		it('fires click event when clicked with DivIcon', () => {
-			const spy = sinon.spy();
-
-			const marker = L.marker([0, 0], {icon: L.divIcon()}).addTo(map);
-
-			marker.on('click', spy);
-			UIEventSimulator.fire('click', marker._icon);
-
-			expect(spy.called).to.be.ok();
-		});
-
-		it('fires click event when clicked on DivIcon child element', () => {
-			const spy = sinon.spy();
-
-			const marker = L.marker([0, 0], {icon: L.divIcon({html: '<img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" />'})}).addTo(map);
-
-			marker.on('click', spy);
-
-			UIEventSimulator.fire('click', marker._icon);
-			expect(spy.called).to.be.ok();
-
-			UIEventSimulator.fire('click', marker._icon.querySelector('img'));
-			expect(spy.calledTwice).to.be.ok();
-		});
-
-		it('fires click event when clicked on DivIcon child element set using setIcon', () => {
-			const spy = sinon.spy();
-
-			const marker = L.marker([0, 0]).addTo(map);
-			marker.setIcon(L.divIcon({html: '<img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" />'}));
-
-			marker.on('click', spy);
-
-			UIEventSimulator.fire('click', marker._icon);
-			expect(spy.called).to.be.ok();
-
-			UIEventSimulator.fire('click', marker._icon.querySelector('img'));
-			expect(spy.calledTwice).to.be.ok();
 		});
 
 		it('do not propagate click event', () => {
