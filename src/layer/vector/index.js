@@ -5,4 +5,3 @@ import './Renderer.getRenderer';	// This is a bit of a hack, but needed because 
 export {Path} from './Path';
 export {Polyline, polyline} from './Polyline';
 export {Polygon, polygon} from './Polygon';
-export {Rectangle, rectangle} from './Rectangle';
