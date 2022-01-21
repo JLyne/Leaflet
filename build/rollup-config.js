@@ -2,13 +2,12 @@
 
 import rollupGitVersion from 'rollup-plugin-git-version';
 import json from '@rollup/plugin-json';
-import gitRev from 'git-rev-sync';
 import pkg from '../package.json';
 import {createBanner} from './banner';
 
 const release = process.env.NODE_ENV === 'release';
 // Skip the git branch+rev in the banner when doing a release build
-const version = release ? pkg.version : `${pkg.version}+${gitRev.branch()}.${gitRev.short()}`;
+const version = pkg.version;
 const banner = createBanner(version);
 
 const outro = `var oldL = window.L;
