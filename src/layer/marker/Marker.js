@@ -67,10 +67,6 @@ export var Marker = Layer.extend({
 		// `Map pane` where the markers icon will be added.
 		pane: 'markerPane',
 
-		// @option shadowPane: String = 'shadowPane'
-		// `Map pane` where the markers shadow will be added.
-		shadowPane: 'shadowPane',
-
 		// @option bubblingMouseEvents: Boolean = false
 		// When `true`, a mouse event on this marker will trigger the same event on the map
 		// (unless [`L.DomEvent.stopPropagation`](#domevent-stoppropagation) is used).
@@ -119,7 +115,6 @@ export var Marker = Layer.extend({
 		}
 
 		this._removeIcon();
-		this._removeShadow();
 	},
 
 	getEvents: function () {
@@ -235,20 +230,6 @@ export var Marker = Layer.extend({
 			DomEvent.on(icon, 'focus', this._panOnFocus, this);
 		}
 
-		var newShadow = options.icon.createShadow(this._shadow),
-		    addShadow = false;
-
-		if (newShadow !== this._shadow) {
-			this._removeShadow();
-			addShadow = true;
-		}
-
-		if (newShadow) {
-			DomUtil.addClass(newShadow, classToAdd);
-			newShadow.alt = '';
-		}
-		this._shadow = newShadow;
-
 
 		if (options.opacity < 1) {
 			this._updateOpacity();
@@ -259,9 +240,6 @@ export var Marker = Layer.extend({
 			this.getPane().appendChild(this._icon);
 		}
 		this._initInteraction();
-		if (newShadow && addShadow) {
-			this.getPane(options.shadowPane).appendChild(this._shadow);
-		}
 	},
 
 	_removeIcon: function () {
@@ -282,21 +260,10 @@ export var Marker = Layer.extend({
 		this._icon = null;
 	},
 
-	_removeShadow: function () {
-		if (this._shadow) {
-			DomUtil.remove(this._shadow);
-		}
-		this._shadow = null;
-	},
-
-	_setPos: function (pos) {
+	_setPos(pos) {
 
 		if (this._icon) {
 			DomUtil.setPosition(this._icon, pos);
-		}
-
-		if (this._shadow) {
-			DomUtil.setPosition(this._shadow, pos);
 		}
 
 		this._zIndex = pos.y + this.options.zIndexOffset;
@@ -341,10 +308,6 @@ export var Marker = Layer.extend({
 
 		if (this._icon) {
 			DomUtil.setOpacity(this._icon, opacity);
-		}
-
-		if (this._shadow) {
-			DomUtil.setOpacity(this._shadow, opacity);
 		}
 	},
 

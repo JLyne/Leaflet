@@ -662,8 +662,8 @@ describe("Map", function () {
 
 		it("return pane by pane", function () {
 
-			expect(map.getPane(map.getPanes()['shadowPane']).className).to.eql(
-				'leaflet-pane leaflet-shadow-pane');
+			expect(map.getPane(map.getPanes()['markerPane']).className).to.eql(
+				'leaflet-pane leaflet-marker-pane');
 		});
 
 		it("return empty pane when not found", function () {
@@ -676,7 +676,7 @@ describe("Map", function () {
 			var keys = Object.keys(map.getPanes());
 
 			expect(keys).to.eql(
-				['mapPane', 'tilePane', 'overlayPane', 'shadowPane', 'markerPane', 'tooltipPane', 'popupPane']);
+				['mapPane', 'tilePane', 'overlayPane', 'markerPane', 'tooltipPane', 'popupPane']);
 		});
 
 		it("return empty pane when map deleted", function () {

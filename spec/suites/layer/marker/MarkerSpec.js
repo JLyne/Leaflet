@@ -11,8 +11,7 @@ describe("Marker", function () {
 		map.setView([0, 0], 0);
 		icon1 = new L.Icon.Default();
 		icon2 = new L.Icon.Default({
-			iconUrl: icon1.options.iconUrl + '?2',
-			shadowUrl: icon1.options.shadowUrl + '?2'
+			iconUrl: `${icon1.options.iconUrl}?2`,
 		});
 	});
 
@@ -83,19 +82,16 @@ describe("Marker", function () {
 			expect(afterIcon.src).to.contain(icon2._getIconUrl('icon'));
 		});
 
-		it('reuses the icon/shadow when changing icon', () => {
+		it('reuses the icon when changing icon', () => {
 			const marker = L.marker([0, 0], {icon: icon1});
 			map.addLayer(marker);
-			var oldIcon = marker._icon;
-			var oldShadow = marker._shadow;
+			const oldIcon = marker._icon;
 
 			marker.setIcon(icon2);
 
 			expect(oldIcon).to.be(marker._icon);
-			expect(oldShadow).to.be(marker._shadow);
 
 			expect(marker._icon.parentNode).to.be(map._panes.markerPane);
-			expect(marker._shadow.parentNode).to.be(map._panes.shadowPane);
 		});
 
 		it("sets the alt attribute to a default value when no alt text is passed", function () {
