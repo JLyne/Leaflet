@@ -823,17 +823,6 @@ describe("Map", function () {
 			map.zoomOut(null, {animate: false});
 		});
 
-		it.skipIf3d("zoomIn ignores the zoomDelta option on non-any3d browsers", function (done) {
-			map.options.zoomSnap = 0.25;
-			map.options.zoomDelta = 0.25;
-			map.once("zoomend", function () {
-				expect(map.getZoom()).to.eql(11);
-				expect(map.getCenter()).to.eql(center);
-				done();
-			});
-			map.zoomIn(null, {animate: false});
-		});
-
 		it.skipIfNo3d("zoomIn respects the zoomDelta option on any3d browsers", function (done) {
 			map.options.zoomSnap = 0.25;
 			map.options.zoomDelta = 0.25;
@@ -916,16 +905,6 @@ describe("Map", function () {
 			map.options.zoomSnap = 0.25;
 			map.once("zoomend", function () {
 				expect(map.getZoom()).to.eql(2.75);
-				expect(map.getCenter().equals(boundsCenter, 0.05)).to.eql(true);
-				done();
-			});
-			map.fitBounds(bounds, {animate: false});
-		});
-
-		it.skipIf3d("Ignores zoomSnap on non-any3d browsers", function (done) {
-			map.options.zoomSnap = 0.25;
-			map.once("zoomend", function () {
-				expect(map.getZoom()).to.eql(2);
 				expect(map.getCenter().equals(boundsCenter, 0.05)).to.eql(true);
 				done();
 			});
