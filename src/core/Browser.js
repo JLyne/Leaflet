@@ -40,8 +40,6 @@ var gecko = userAgentContains('gecko') && !webkit && !opera;
 // @property safari: Boolean; `true` for the Safari browser.
 var safari = !chrome && userAgentContains('safari');
 
-var phantom = userAgentContains('phantom');
-
 // @property win: Boolean; `true` when the browser is running in a Windows platform
 var win = navigator.platform.indexOf('Win') === 0;
 
@@ -53,7 +51,7 @@ var gecko3d = 'MozPerspective' in style;
 
 // @property any3d: Boolean
 // `true` for all browsers supporting CSS transforms.
-var any3d = !window.L_DISABLE_3D && (webkit3d || gecko3d) && !phantom;
+var any3d = !window.L_DISABLE_3D && (webkit3d || gecko3d);
 
 // @property mobile: Boolean; `true` for all browsers running in a mobile device.
 var mobile = typeof orientation !== 'undefined' || userAgentContains('mobile');
@@ -126,7 +124,6 @@ export default {
 	chrome: chrome,
 	gecko: gecko,
 	safari: safari,
-	phantom: phantom,
 	win: win,
 	webkit3d: webkit3d,
 	gecko3d: gecko3d,
