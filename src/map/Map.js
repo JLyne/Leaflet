@@ -155,7 +155,7 @@ export var Map = Evented.extend({
 		this.callInitHooks();
 
 		// don't animate on browsers without hardware-accelerated transitions
-		this._zoomAnimated = DomUtil.TRANSITION && Browser.any3d && this.options.zoomAnimation;
+		this._zoomAnimated = DomUtil.TRANSITION && this.options.zoomAnimation;
 
 		// zoom transitions run with the same duration for all layers, so if one of transitionend events
 		// happens after starting zoom animation (propagating to the map pane), we know that it ended globally
@@ -219,14 +219,14 @@ export var Map = Evented.extend({
 	// @method zoomIn(delta?: Number, options?: Zoom options): this
 	// Increases the zoom of the map by `delta` ([`zoomDelta`](#map-zoomdelta) by default).
 	zoomIn: function (delta, options) {
-		delta = delta || (Browser.any3d ? this.options.zoomDelta : 1);
+		delta = delta || this.options.zoomDelta;
 		return this.setZoom(this._zoom + delta, options);
 	},
 
 	// @method zoomOut(delta?: Number, options?: Zoom options): this
 	// Decreases the zoom of the map by `delta` ([`zoomDelta`](#map-zoomdelta) by default).
 	zoomOut: function (delta, options) {
-		delta = delta || (Browser.any3d ? this.options.zoomDelta : 1);
+		delta = delta || this.options.zoomDelta;
 		return this.setZoom(this._zoom - delta, options);
 	},
 
@@ -356,7 +356,7 @@ export var Map = Evented.extend({
 	flyTo: function (targetCenter, targetZoom, options) {
 
 		options = options || {};
-		if (options.animate === false || !Browser.any3d) {
+		if (options.animate === false) {
 			return this.setView(targetCenter, targetZoom, options);
 		}
 
@@ -863,7 +863,7 @@ export var Map = Evented.extend({
 		    se = bounds.getSouthEast(),
 		    size = this.getSize().subtract(padding),
 		    boundsSize = toBounds(this.project(se, zoom), this.project(nw, zoom)).getSize(),
-		    snap = Browser.any3d ? this.options.zoomSnap : 1,
+		    snap = this.options.zoomSnap,
 		    scalex = size.x / boundsSize.x,
 		    scaley = size.y / boundsSize.y,
 		    scale = inside ? Math.max(scalex, scaley) : Math.min(scalex, scaley);
@@ -1091,7 +1091,7 @@ export var Map = Evented.extend({
 	_initLayout: function () {
 		var container = this._container;
 
-		this._fadeAnimated = this.options.fadeAnimation && Browser.any3d;
+		this._fadeAnimated = this.options.fadeAnimation;
 
 		DomUtil.addClass(container, 'leaflet-container' +
 			(Browser.touch ? ' leaflet-touch' : '') +
@@ -1310,7 +1310,7 @@ export var Map = Evented.extend({
 			onOff(window, 'resize', this._onResize, this);
 		}
 
-		if (Browser.any3d && this.options.transform3DLimit) {
+		if (this.options.transform3DLimit) {
 			(remove ? this.off : this.on).call(this, 'moveend', this._onMoveEnd);
 		}
 	},
@@ -1569,7 +1569,7 @@ export var Map = Evented.extend({
 	_limitZoom: function (zoom) {
 		var min = this.getMinZoom(),
 		    max = this.getMaxZoom(),
-		    snap = Browser.any3d ? this.options.zoomSnap : 1;
+		    snap = this.options.zoomSnap;
 		if (snap) {
 			zoom = Math.round(zoom / snap) * snap;
 		}
