@@ -1138,9 +1138,6 @@ export var Map = Evented.extend({
 		// @pane overlayPane: HTMLElement = 400
 		// Pane for vectors (`Path`s, like `Polyline`s and `Polygon`s)
 		this.createPane('overlayPane');
-		// @pane shadowPane: HTMLElement = 500
-		// Pane for overlay shadows (e.g. `Marker` shadows)
-		this.createPane('shadowPane');
 		// @pane markerPane: HTMLElement = 600
 		// Pane for `Icon`s of `Marker`s
 		this.createPane('markerPane');
@@ -1152,8 +1149,7 @@ export var Map = Evented.extend({
 		this.createPane('popupPane');
 
 		if (!this.options.markerZoomAnimation) {
-			DomUtil.addClass(panes.markerPane, 'leaflet-zoom-hide');
-			DomUtil.addClass(panes.shadowPane, 'leaflet-zoom-hide');
+			panes.markerPane.classList.add('leaflet-zoom-hide');
 		}
 	},
 

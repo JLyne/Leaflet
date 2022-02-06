@@ -18,10 +18,6 @@ import Browser from '../../core/Browser';
  *     iconSize: [38, 95],
  *     iconAnchor: [22, 94],
  *     popupAnchor: [-3, -76],
- *     shadowUrl: 'my-icon-shadow.png',
- *     shadowRetinaUrl: 'my-icon-shadow@2x.png',
- *     shadowSize: [68, 95],
- *     shadowAnchor: [22, 94]
  * });
  *
  * L.marker([50.505, 30.57], {icon: myIcon}).addTo(map);
@@ -57,20 +53,8 @@ export var Icon = Class.extend({
 	 * @option tooltipAnchor: Point = [0, 0]
 	 * The coordinates of the point from which tooltips will "open", relative to the icon anchor.
 	 *
-	 * @option shadowUrl: String = null
-	 * The URL to the icon shadow image. If not specified, no shadow image will be created.
-	 *
-	 * @option shadowRetinaUrl: String = null
-	 *
-	 * @option shadowSize: Point = null
-	 * Size of the shadow image in pixels.
-	 *
-	 * @option shadowAnchor: Point = null
-	 * The coordinates of the "tip" of the shadow (relative to its top left corner) (the same
-	 * as iconAnchor if not specified).
-	 *
 	 * @option className: String = ''
-	 * A custom class name to assign to both icon and shadow images. Empty by default.
+	 * A custom class name to assign to icon images. Empty by default.
 	 */
 
 	options: {
@@ -95,14 +79,8 @@ export var Icon = Class.extend({
 		return this._createIcon('icon', oldIcon);
 	},
 
-	// @method createShadow(oldIcon?: HTMLElement): HTMLElement
-	// As `createIcon`, but for the shadow beneath it.
-	createShadow: function (oldIcon) {
-		return this._createIcon('shadow', oldIcon);
-	},
-
-	_createIcon: function (name, oldIcon) {
-		var src = this._getIconUrl(name);
+	_createIcon(name, oldIcon) {
+		const src = this._getIconUrl(name);
 
 		if (!src) {
 			if (name === 'icon') {
@@ -129,8 +107,8 @@ export var Icon = Class.extend({
 			sizeOption = [sizeOption, sizeOption];
 		}
 
-		var size = point(sizeOption),
-		    anchor = point(name === 'shadow' && options.shadowAnchor || options.iconAnchor ||
+		const size = point(sizeOption),
+		    anchor = point(options.iconAnchor ||
 		            size && size.divideBy(2, true));
 
 		img.className = 'leaflet-marker-' + name + ' ' + (options.className || '');
