@@ -43,10 +43,4 @@ describe('Icon.Default', () => {
 		expect(img.clientHeight).to.be(41);
 		expect(img.clientWidth).to.be(25);
 	});
-
-	it('shadow measures 41x41px', () => {
-		const img = map.getPane('shadowPane').querySelector('img');
-		expect(img.clientHeight).to.be(41);
-		expect(img.clientWidth).to.be(41);
-	});
 });
