@@ -28,7 +28,7 @@ const config = {
 			format: 'umd',
 			name: 'leaflet',
 			banner: banner,
-			outro: outro,
+			// outro: outro,
 			sourcemap: true,
 			freeze: false,
 			esModule: false
