@@ -53,7 +53,7 @@
     "integrity": "NODE_ENV=release npm run build && node ./build/integrity.js",
     "bundlemon": "bundlemon --subProject js --defaultCompression none && bundlemon --subProject js-gzip --defaultCompression gzip",
     "serve": "cd docs && bundle exec jekyll serve",
-    "prepare": "husky install"
+    "prepare": "npm run build"
   },
   "eslintConfig": {
     "ignorePatterns": [
