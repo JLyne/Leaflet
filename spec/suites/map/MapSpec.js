@@ -1003,13 +1003,6 @@ describe('Map', () => {
 			map.addLayer(layer);
 		});
 
-		it('throws if adding something which is not a layer', () => {
-			const control = L.control.layers();
-			expect(() => {
-				map.addLayer(control);
-			}).to.throwError();
-		});
-
 		describe('When the first layer is added to a map', () => {
 			it('fires a zoomlevelschange event', () => {
 				const spy = sinon.spy();
