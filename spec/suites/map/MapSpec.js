@@ -476,13 +476,6 @@ describe("Map", function () {
 			map.addLayer(layer);
 		});
 
-		it("throws if adding something which is not a layer", function () {
-			var control = L.control.layers();
-			expect(function () {
-				map.addLayer(control);
-			}).to.throwError();
-		});
-
 		describe("When the first layer is added to a map", function () {
 			it("fires a zoomlevelschange event", function () {
 				var spy = sinon.spy();
@@ -1133,15 +1126,15 @@ describe("Map", function () {
 		it("DOM events propagate from polygon to map", function () {
 			var spy = sinon.spy();
 			map.on("mousemove", spy);
-			var layer = L.polygon([[1, 2], [3, 4], [5, 6]]).addTo(map);
-			happen.at('mousemove', 210, 210)
+			L.polygon([[1, 2], [3, 4], [5, 6]]).addTo(map);
+			happen.at('mousemove', 210, 210);
 			expect(spy.calledOnce).to.be.ok();
 		});
 
 		it("DOM events propagate from marker to map", function () {
 			var spy = sinon.spy();
 			map.on("mousemove", spy);
-			var layer = L.marker([1, 2]).addTo(map);
+			L.marker([1, 2]).addTo(map);
 			happen.at('click', 210, 210);
 			expect(spy.calledOnce).to.be.ok();
 		});
@@ -1239,7 +1232,7 @@ describe("Map", function () {
 			map.on('contextmenu', function (e) {
 				spy(e.originalEvent.defaultPrevented);
 			});
-			var marker = L.polygon([[-10, -10], [10, -10], [10, 10], [-10, 10]]).addTo(map);
+			L.polygon([[-10, -10], [10, -10], [10, 10], [-10, 10]]).addTo(map);
 
 			happen.at('contextmenu', 0, 0); // first
 

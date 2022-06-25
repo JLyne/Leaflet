@@ -29,14 +29,6 @@
 		], {renderer: canvas}).addTo(map).bindPopup('Hello Canvas');
 
 		map.setView([36, 52], 3);
-
-		var layersControl = new L.Control.Layers({
-		}, {
-			'poly': poly,
-			'path': path,
-			'canvas': canvas,
-		}, {collapsed: false});
-		map.addControl(layersControl);
 	</script>
 </body>
 </html>
