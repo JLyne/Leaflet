@@ -2,9 +2,6 @@
 import {version} from '../package.json';
 export {version};
 
-// control
-export * from './control/index';
-
 // core
 export * from './core/index';
 
