@@ -753,9 +753,6 @@ export const Map = Evented.extend({
 
 		this._mapPane.remove();
 
-		if (this._clearControlPos) {
-			this._clearControlPos();
-		}
 		if (this._resizeRequest) {
 			Util.cancelAnimFrame(this._resizeRequest);
 			this._resizeRequest = null;
@@ -1106,10 +1103,6 @@ export const Map = Evented.extend({
 		}
 
 		this._initPanes();
-
-		if (this._initControlPos) {
-			this._initControlPos();
-		}
 	},
 
 	_initPanes() {
