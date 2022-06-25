@@ -110,7 +110,7 @@
 
 /* control positioning */
 
-.leaflet-control {
+/*.leaflet-control {
 	position: relative;
 	z-index: 800;
 	pointer-events: auto;
@@ -133,7 +133,7 @@
 .leaflet-left {
 	left: 0;
 	}
-/*.leaflet-control {
+.leaflet-control {
 	float: left;
 	clear: both;
 	}
@@ -203,8 +203,8 @@
 .leaflet-crosshair .leaflet-interactive {
 	cursor: crosshair;
 	}
-.leaflet-popup-pane,
-.leaflet-control {
+.leaflet-popup-pane/*,
+/*.leaflet-control */{
 	cursor: auto;
 	}
 .leaflet-dragging .leaflet-grab,
@@ -314,7 +314,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 /* zoom control */
 
-.leaflet-control-zoom-in,
+/*.leaflet-control-zoom-in,
 .leaflet-control-zoom-out {
 	font: bold 18px 'Lucida Console', Monaco, monospace;
 	text-indent: 1px;
@@ -322,7 +322,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 .leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out  {
 	font-size: 22px;
-	}
+	}*/
 
 
 /* layers control */
@@ -613,10 +613,12 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 /* Printing */
 
+/*
 @media print {
-	/* Prevent printers from removing background-images of controls. */
+	!* Prevent printers from removing background-images of controls. *!
 	.leaflet-control {
 		-webkit-print-color-adjust: exact;
 		print-color-adjust: exact;
 		}
 	}
+*/
