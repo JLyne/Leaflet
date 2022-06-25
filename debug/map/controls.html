@@ -28,17 +28,6 @@
 
 		var marker2 = new L.Marker(new L.LatLng(50.502, 30.515));
 		map.addLayer(marker2);
-
-		var layersControl = new L.Control.Layers({
-			'OSM': osm,
-			'OSM2': osm2
-		}, {
-			'Some marker': marker,
-			'Another marker': marker2
-		});
-
-		map.addControl(layersControl);
-
 	</script>
 </body>
 </html>

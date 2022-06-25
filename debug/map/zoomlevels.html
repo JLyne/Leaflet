@@ -23,11 +23,6 @@
 			osm = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {attribution: osmAttrib, minZoom: 0, maxZoom: 10}).addTo(map),
 			osm2 = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {attribution: 'Hello world', minZoom: 5, maxZoom: 18});
 
-		L.control.layers({
-			'OSM (5-18)': osm2,
-			'OSM (0-10)': osm
-		}).addTo(map);
-
 		function getRandomLatLng(llbounds) {
 			var s = llbounds.getSouth(),
 			    n = llbounds.getNorth(),
